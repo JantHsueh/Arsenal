@@ -2,18 +2,14 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    >
+    android:layout_height="match_parent">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:background="@color/colorPrimary"
-        app:layout_behavior="cn.xuexuan.newui.CoordinatorBehavior" />
+        app:layout_behavior="cn.xuexuan.newui.CoordinatorBehavior"/>
 
 
     <cn.xuexuan.newui.MoveView
