@@ -3,7 +3,7 @@ package cn.xuexuan.newui;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Coordinator extends AppCompatActivity {
+public class CoordinatorActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

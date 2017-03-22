@@ -8,14 +8,17 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="#efbf01"
+        android:text="button"
+        android:textColor="#000000"
         app:layout_behavior="cn.xuexuan.newui.CoordinatorBehavior"/>
 
 
     <cn.xuexuan.newui.MoveView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
+
         />
 
 

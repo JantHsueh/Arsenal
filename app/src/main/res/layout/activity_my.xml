@@ -22,13 +22,15 @@
             >
 
             <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/CollapsingToolbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:contentScrim="@color/colorPrimary"
                 app:expandedTitleMarginEnd="64dp"
                 app:expandedTitleMarginStart="48dp"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                app:title="demo"
+                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -44,9 +46,10 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
+                    
                     app:layout_collapseMode="pin"
                     android:elevation="4dp"
-                    app:title="demo"/>
+                    />
 
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
@@ -63,6 +66,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/coordinator_activity_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:layout_margin="30dp"
+                    android:padding="10dp"
+                    android:text="Coordinator activity"
+                    android:textColor="#ffffff"
+                    />
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
