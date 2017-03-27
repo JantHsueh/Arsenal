@@ -1,4 +1,4 @@
-package cn.xuexuan.newui;
+package cn.xuexuan.newui.ui;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;

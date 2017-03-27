@@ -14,7 +14,7 @@
         app:layout_behavior="cn.xuexuan.newui.CoordinatorBehavior"/>
 
 
-    <cn.xuexuan.newui.MoveView
+    <cn.xuexuan.newui.ui.MoveView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@color/colorPrimary"

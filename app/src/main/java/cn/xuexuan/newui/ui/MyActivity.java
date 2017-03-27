@@ -1,4 +1,4 @@
-package cn.xuexuan.newui;
+package cn.xuexuan.newui.ui;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+
+import cn.xuexuan.newui.R;
 
 /**
  * Created by Jant on 2017/3/17.
