@@ -5,4 +5,7 @@ package cn.xuexuan.newui.viewmodel.contract;
  */
 
 public interface ZhiHuContract {
+
+
+    interface
 }
