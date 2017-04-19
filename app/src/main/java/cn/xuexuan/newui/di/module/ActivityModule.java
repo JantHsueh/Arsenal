@@ -2,8 +2,7 @@ package cn.xuexuan.newui.di.module;
 
 import android.app.Activity;
 
-import javax.inject.Singleton;
-
+import cn.xuexuan.newui.di.ActivityScope;
 import dagger.Module;
 import dagger.Provides;
 
@@ -21,7 +20,7 @@ public class ActivityModule {
         mActivity = activity;
     }
 
-    @Singleton
+    @ActivityScope
     @Provides
     Activity getActivity(){
         return mActivity;

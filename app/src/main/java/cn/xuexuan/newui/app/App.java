@@ -1,6 +1,9 @@
 package cn.xuexuan.newui.app;
 
 import android.app.Application;
+import android.content.Context;
+
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 import cn.xuexuan.newui.di.component.AppComponent;
 import cn.xuexuan.newui.di.component.DaggerAppComponent;
@@ -22,6 +25,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
+        Fresco.initialize(this);
 
     }
 
@@ -38,4 +42,7 @@ public class App extends Application {
     }
 
 
+    public static synchronized Context getInstance(){
+        return sInstance;
+    }
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="cn.xuexuan.newui.viewmodel.TopItemViewModel"/>
+
+
+        <import type="cn.xuexuan.newui.R"/>
+    </data>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:clickCommand="@{viewModel.mTopItemClickCommand}">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            app:placeholderImageRes="@{R.mipmap.ic_launcher}"
+            />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@{viewModel.mTitle}"
+            />
+    </FrameLayout>
+</layout>

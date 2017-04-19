@@ -1,6 +1,7 @@
 package cn.xuexuan.newui.di.module;
 
 import cn.xuexuan.newui.app.App;
+import cn.xuexuan.newui.model.http.RetrofitHelper;
 import dagger.Module;
 import dagger.Provides;
 
@@ -25,5 +26,20 @@ public class AppModule {
     App provideApplication(){
      return application;
     }
+
+
+
+
+    @Provides
+//    @Singleton
+    RetrofitHelper provideRetrofitHelper() {
+        return new RetrofitHelper();
+    }
+
+//    @Provides
+//    @Singleton
+//    RealmHelper provideRealmHelper() {
+//        return new RealmHelper(application);
+//    }
 
 }

@@ -1,16 +1,21 @@
 package cn.xuexuan.newui.ui;
 
-import android.content.Intent;
+import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 
+import cn.xuexuan.newui.BR;
 import cn.xuexuan.newui.R;
 import cn.xuexuan.newui.base.BaseActivity;
+import cn.xuexuan.newui.databinding.ActivityZhiHuBinding;
 import cn.xuexuan.newui.viewmodel.ZhiHuViewModel;
 import cn.xuexuan.newui.viewmodel.contract.ZhiHuContract;
 
@@ -20,11 +25,6 @@ import cn.xuexuan.newui.viewmodel.contract.ZhiHuContract;
 
 public class ZhiHuActivity extends BaseActivity<ZhiHuViewModel> implements ZhiHuContract.View {
 
-
-    public void startCoordinatorActivity(View view){
-        Intent lIntent = new Intent(this,CoordinatorActivity.class);
-        startActivity(lIntent);
-    }
 
     @Override
     public void initInject() {
@@ -38,7 +38,10 @@ public class ZhiHuActivity extends BaseActivity<ZhiHuViewModel> implements ZhiHu
 
     @Override
     public void initEventAndData() {
-        Button lButton = (Button) findViewById(R.id.coordinator_activity_button);
+
+        ActivityZhiHuBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_zhi_hu);
+        binding.setVariable(BR.viewModel, mViewModel);
+        binding.recyclerView.addItemDecoration(new DividerItemDecoration(this));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         CollapsingToolbarLayout lCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.CollapsingToolbarLayout);
@@ -53,12 +56,34 @@ public class ZhiHuActivity extends BaseActivity<ZhiHuViewModel> implements ZhiHu
         lCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
         lCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.GREEN);//设置收缩后Toolbar上字体的颜色
 
-        lButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent lIntent = new Intent(ZhiHuActivity.this,CoordinatorActivity.class);
-                startActivity(lIntent);
-            }
-        });
     }
+
+
+    public static class DividerItemDecoration extends RecyclerView.ItemDecoration {
+        private Drawable mDivider;
+
+        public DividerItemDecoration(Context context) {
+            mDivider = context.getResources().getDrawable(R.drawable.divider);
+        }
+
+        @Override
+        public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+            int left = parent.getPaddingLeft();
+            int right = parent.getWidth() - parent.getPaddingRight();
+
+            int childCount = parent.getChildCount();
+            for (int i = 0; i < childCount; i++) {
+                View child = parent.getChildAt(i);
+
+                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+
+                int top = child.getBottom() + params.bottomMargin;
+                int bottom = top + mDivider.getIntrinsicHeight();
+
+                mDivider.setBounds(left, top, right, bottom);
+                mDivider.draw(c);
+            }
+        }
+    }
+
 }
