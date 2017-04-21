@@ -3,6 +3,7 @@ package cn.xuexuan.newui.viewmodel;
 import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableArrayList;
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableList;
 
 import com.kelin.mvvmlight.command.ReplyCommand;
@@ -34,10 +35,15 @@ public class ZhiHuViewModel extends BaseViewModel<ZhiHuContract.View> implements
     public static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("yyyyMMdd");
 
     private Context mContext;
+    private RetrofitHelper mRetrofitHelper;
+    private String mDateForGet;
+
+
+
+
     //顶部新闻
     public final ItemView mTopItemView = ItemView.of(BR.viewModel, R.layout.top_news_item);
     public final ObservableList<TopItemViewModel> mTopItemViewModel = new ObservableArrayList();
-    private RetrofitHelper mRetrofitHelper;
 
 
     //列表新闻
@@ -54,35 +60,61 @@ public class ZhiHuViewModel extends BaseViewModel<ZhiHuContract.View> implements
         }
 
     };
+
+
+    public final ObservableBoolean mIsRefreshing = new ObservableBoolean(true);
     // viewModel for RecyclerView
     public final ObservableList<ListItemViewModel> mListItemViewModel = new ObservableArrayList<>();
 
 
-    public final ReplyCommand onRefreshCommand = new ReplyCommand(() -> {});
+    public final ReplyCommand onRefreshCommand = new ReplyCommand(() -> {
+        Observable.just(Calendar.getInstance())
+                .doOnNext(calendar -> calendar.add(Calendar.DAY_OF_MONTH, 1))
+                .map(calendar -> DAY_FORMAT.format(calendar.getTimeInMillis()))
+                .subscribe(s -> {
+                    loadListNews(s,true);
+                    loadTopNews();
+                });
+    });
 
+
+    public final ReplyCommand<Integer> onLoadMoreCommand = new ReplyCommand<>(() -> {
+        loadListNews(mDateForGet,false);
+
+    });
 
     @Inject
     public ZhiHuViewModel(Activity activity, RetrofitHelper retrofitHelper) {
 
         mContext = activity;
         mRetrofitHelper = retrofitHelper;
+        //传入时间如果是2017.04.22，那么获取2017.04.21的文章，所以在日期上+1
         Observable.just(Calendar.getInstance())
                 .doOnNext(calendar -> calendar.add(Calendar.DAY_OF_MONTH, 1))
                 .map(calendar -> DAY_FORMAT.format(calendar.getTimeInMillis()))
                 .subscribe(s -> {
-                    loadListNews(s);
+                    loadListNews(s,false);
                     loadTopNews();
                 });
-
     }
 
 
-    private void loadListNews(String date) {
+    /**
+     * 获取类表的文章
+     * @param date       文章的日期
+     * @param isClear    是否清理之前的获取的文章
+     */
+    private void loadListNews(String date, boolean isClear) {
+        mIsRefreshing.set(true);
+
         Disposable listNews = mRetrofitHelper.fetchDailyBeforeListInfo(date)
 
                 .filter(d -> !d.getStories().isEmpty())
-                .flatMap(d -> Observable.fromIterable(d.getStories()))
+                .doOnNext(d -> mDateForGet = d.getDate())
                 .compose(RxUtil.rxSchedulerHelper())
+                .doOnNext(m -> {if (isClear)mListItemViewModel.clear();})
+                .flatMap(d -> Observable.fromIterable(d.getStories()))
+                .doAfterTerminate(()->mIsRefreshing.set(false))
                 .subscribe(storiesBeen -> mListItemViewModel.add(new ListItemViewModel(mContext, storiesBeen)));
     }
 
@@ -91,8 +123,9 @@ public class ZhiHuViewModel extends BaseViewModel<ZhiHuContract.View> implements
 
         Disposable lTopNews = mRetrofitHelper.fetchDailyListInfo()
                 .filter(d -> !d.getTop_stories().isEmpty())
-                .flatMap(dailyListBean -> Observable.fromIterable(dailyListBean.getTop_stories()))
                 .compose(RxUtil.rxSchedulerHelper())
+                .doOnNext(m -> mTopItemViewModel.clear())
+                .flatMap(dailyListBean -> Observable.fromIterable(dailyListBean.getTop_stories()))
                 .doOnNext(dailyListBean -> mTopItemViewModel.add(new TopItemViewModel(mContext,dailyListBean)))
                 .toList()
                 .subscribe((m) ->mView.setViewPager());

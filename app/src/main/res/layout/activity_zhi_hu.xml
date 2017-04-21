@@ -29,7 +29,7 @@
 
             <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="256dp"
                 android:fitsSystemWindows="true"
                 >
 
@@ -98,6 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:refreshing="@{viewModel.mIsRefreshing}"
                     app:onRefreshCommand="@{viewModel.onRefreshCommand}"
                     >
 
@@ -107,6 +108,7 @@
                         android:layout_height="wrap_content"
                         app:itemView="@{viewModel.mListItemView}"
                         app:items="@{viewModel.mListItemViewModel}"
+                        app:onLoadMoreCommand="@{viewModel.onLoadMoreCommand}"
                         app:layoutManager="@{LayoutManagers.linear()}">
                     </android.support.v7.widget.RecyclerView>
                 </android.support.v4.widget.SwipeRefreshLayout>
