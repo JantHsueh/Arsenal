@@ -6,7 +6,7 @@ package cn.xuexuan.newui.base;
 
 public class BaseViewModel <T extends BaseView> implements BaseVM<T> {
 
-    private T mView;
+    public T mView;
 
 
     @Override

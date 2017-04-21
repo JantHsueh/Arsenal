@@ -11,6 +11,10 @@ public interface ZhiHuContract {
 
     interface View extends BaseView {
 
+
+        //Indicator must setViewPager after setAdapter,but data for ViewPager is load in other ViewModel
+        void setViewPager();
+
     }
 
     interface ViewModel{

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">New UI</string>
+    <string name="app_name">Arsenal</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -94,4 +94,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="zhi_hu">知乎</string>
+
+
 </resources>

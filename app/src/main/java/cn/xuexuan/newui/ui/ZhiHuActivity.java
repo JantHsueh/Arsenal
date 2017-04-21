@@ -5,11 +5,9 @@ import android.databinding.DataBindingUtil;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import cn.xuexuan.newui.BR;
@@ -26,6 +24,11 @@ import cn.xuexuan.newui.viewmodel.contract.ZhiHuContract;
 public class ZhiHuActivity extends BaseActivity<ZhiHuViewModel> implements ZhiHuContract.View {
 
 
+
+    private ActivityZhiHuBinding mActivityZhiHuBinding;
+
+
+
     @Override
     public void initInject() {
         getActivityComponent().inject(this);
@@ -39,23 +42,27 @@ public class ZhiHuActivity extends BaseActivity<ZhiHuViewModel> implements ZhiHu
     @Override
     public void initEventAndData() {
 
-        ActivityZhiHuBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_zhi_hu);
-        binding.setVariable(BR.viewModel, mViewModel);
-        binding.recyclerView.addItemDecoration(new DividerItemDecoration(this));
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        mActivityZhiHuBinding = DataBindingUtil.setContentView(this, R.layout.activity_zhi_hu);
+        mActivityZhiHuBinding.setVariable(BR.viewModel, mViewModel);
+        mActivityZhiHuBinding.recyclerView.addItemDecoration(new DividerItemDecoration(this));
 
-        CollapsingToolbarLayout lCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.CollapsingToolbarLayout);
-
+        setSupportActionBar(mActivityZhiHuBinding.toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, mActivityZhiHuBinding.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        lCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
-        lCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.GREEN);//设置收缩后Toolbar上字体的颜色
+        mActivityZhiHuBinding.CollapsingToolbarLayout.setExpandedTitleColor(Color.argb(0, 255, 255, 255));//设置还没收缩时状态下字体颜色
+        mActivityZhiHuBinding.CollapsingToolbarLayout.setCollapsedTitleTextColor(Color.argb(255, 255, 255, 255));//设置收缩后Toolbar上字体的颜色
 
+    }
+
+    @Override
+    public void setViewPager() {
+        mActivityZhiHuBinding.indicator.setViewPager(mActivityZhiHuBinding.viewpager);
     }
 
 

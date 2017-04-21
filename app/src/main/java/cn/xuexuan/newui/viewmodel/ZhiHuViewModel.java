@@ -93,7 +93,9 @@ public class ZhiHuViewModel extends BaseViewModel<ZhiHuContract.View> implements
                 .filter(d -> !d.getTop_stories().isEmpty())
                 .flatMap(dailyListBean -> Observable.fromIterable(dailyListBean.getTop_stories()))
                 .compose(RxUtil.rxSchedulerHelper())
-                .subscribe(dailyListBean -> mTopItemViewModel.add(new TopItemViewModel(mContext,dailyListBean)));
+                .doOnNext(dailyListBean -> mTopItemViewModel.add(new TopItemViewModel(mContext,dailyListBean)))
+                .toList()
+                .subscribe((m) ->mView.setViewPager());
 
     }
 
