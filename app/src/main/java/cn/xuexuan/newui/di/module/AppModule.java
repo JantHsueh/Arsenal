@@ -32,7 +32,7 @@ public class AppModule {
 
     @Provides
 //    @Singleton
-    RetrofitHelper provideRetrofitHelper() {
+    public RetrofitHelper provideRetrofitHelper() {
         return new RetrofitHelper();
     }
 

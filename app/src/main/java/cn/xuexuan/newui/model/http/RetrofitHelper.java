@@ -8,6 +8,7 @@ import cn.xuexuan.newui.BuildConfig;
 import cn.xuexuan.newui.app.Constants;
 import cn.xuexuan.newui.model.bean.DailyBeforeListBean;
 import cn.xuexuan.newui.model.bean.DailyListBean;
+import cn.xuexuan.newui.model.bean.ZhiHuDetailBean;
 import cn.xuexuan.newui.model.http.api.ZhiHuApis;
 import cn.xuexuan.newui.util.SystemUtil;
 import io.reactivex.Observable;
@@ -32,7 +33,7 @@ public class RetrofitHelper {
     private static ZhiHuApis sZhiHuApiService = null;
 
 
-    public RetrofitHelper(){
+    public RetrofitHelper() {
 
         initOkHttp();
         sZhiHuApiService = getApiService(ZhiHuApis.HOST, ZhiHuApis.class);
@@ -103,7 +104,7 @@ public class RetrofitHelper {
         sOkHttpClient = builder.build();
     }
 
-    private <T> T getApiService(String baseUrl, Class<T> clz){
+    private <T> T getApiService(String baseUrl, Class<T> clz) {
 
         Retrofit lRetrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -116,13 +117,23 @@ public class RetrofitHelper {
 
     }
 
-    public Observable<DailyBeforeListBean> fetchDailyBeforeListInfo(String date){
+    public Observable<DailyBeforeListBean> fetchDailyBeforeListInfo(String date) {
         return sZhiHuApiService.getDailyBeforeList(date);
     }
 
 
-    public Observable<DailyListBean> fetchDailyListInfo(){
+    public Observable<DailyListBean> fetchDailyListInfo() {
         return sZhiHuApiService.getDailyList();
+    }
+
+
+    public Observable<ZhiHuDetailBean> fetchZhiHuDetail(long id) {
+        return sZhiHuApiService.getDetailInfo(id);
+    }
+
+    public Observable<String> getNewsDetailCss(String url) {
+
+        return sZhiHuApiService.getNewsDetailCss(url);
     }
 
 }
