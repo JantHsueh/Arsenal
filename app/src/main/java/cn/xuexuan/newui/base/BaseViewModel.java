@@ -14,5 +14,10 @@ public class BaseViewModel <T extends BaseView> implements BaseVM<T> {
         this.mView = view;
     }
 
+    @Override
+    public void detachView() {
+
+    }
+
 
 }

@@ -6,7 +6,6 @@ import android.webkit.WebViewClient;
 import cn.xuexuan.newui.BR;
 import cn.xuexuan.newui.R;
 import cn.xuexuan.newui.base.BaseActivity;
-import cn.xuexuan.newui.databinding.ActivityZhiHuDetailBinding;
 import cn.xuexuan.newui.viewmodel.ZhiHuDetailViewModel;
 import cn.xuexuan.newui.viewmodel.contract.ZhiHuDetailContract;
 
@@ -30,6 +29,8 @@ public class ZhiHuDetailActivity extends BaseActivity<ZhiHuDetailViewModel> impl
         long id = getIntent().getLongExtra(EXTRA_KEY_NEWS_ID,-1);
         ActivityZhiHuDetailBinding lViewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_zhi_hu_detail);
         lViewDataBinding.setVariable(BR.viewModel,mViewModel);
+
+
 
         setSupportActionBar(lViewDataBinding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

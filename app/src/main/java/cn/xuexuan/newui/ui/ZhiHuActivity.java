@@ -23,11 +23,7 @@ import cn.xuexuan.newui.viewmodel.contract.ZhiHuContract;
 
 public class ZhiHuActivity extends BaseActivity<ZhiHuViewModel> implements ZhiHuContract.View {
 
-
-
     private ActivityZhiHuBinding mActivityZhiHuBinding;
-
-
 
     @Override
     public void initInject() {

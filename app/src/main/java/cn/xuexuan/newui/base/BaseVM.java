@@ -8,4 +8,5 @@ public interface BaseVM<T extends  BaseView> {
 
     void attachView(T view);
 
+    void detachView();
 }

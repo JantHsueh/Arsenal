@@ -96,5 +96,14 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="zhi_hu">知乎</string>
 
+    <string name="about_author">作者:薛瑄（微信号：xuexuan100） </string>
 
+    <string name="about_address">源码地址:https://github.com/JantHsueh/Arsenal</string>
+    <string name="about_project">
+        项目简介：\n一个技术型的APP，方便大家在需要的时候直接复制。\n以技术为主，通过简单的功能展现技术，包括了我这两年多，开发用到的主要功能，使用目前Android流行的框架。
+        这个项目我会不断更新与维护，加入更多的功能，也希望有更多朋友加入组织
+    </string>
+
+    <string name="about_award">请我喝饮料</string>
+    <string name="about_info">Arsenal版本：</string>
 </resources>
