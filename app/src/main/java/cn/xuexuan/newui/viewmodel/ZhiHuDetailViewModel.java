@@ -66,4 +66,10 @@ public class ZhiHuDetailViewModel extends BaseViewModel<ZhiHuDetailContract.View
 
     }
 
+    @Override
+    public void detachView() {
+
+    }
+
+
 }

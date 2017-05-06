@@ -1,7 +1,6 @@
 package cn.xuexuan.newui.app;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
@@ -42,7 +41,18 @@ public class App extends Application {
     }
 
 
-    public static synchronized Context getInstance(){
+    public static synchronized App getInstance(){
         return sInstance;
     }
+
+
+    /**
+     * 退出app
+     */
+    public void exitApp(){
+
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(0);
+    }
+
 }

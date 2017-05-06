@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Arsenal</string>
+    <string name="app_introduction">A collection of code art</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -89,12 +90,22 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+
+
+    //main drawer
+    <string name="drawer_group_content">功能</string>
+    <string name="drawer_group_options">选项</string>
+    <string name="zhihu">知乎日报</string>
+    <string name="drawer_about">关于</string>
+
+    <string name="drawer_open">打开</string>
+    <string name="drawer_close">关闭</string>
+
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="zhi_hu">知乎</string>
 
     <string name="about_author">作者:薛瑄（微信号：xuexuan100） </string>
 

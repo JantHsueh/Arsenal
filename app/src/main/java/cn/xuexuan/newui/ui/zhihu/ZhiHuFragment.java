@@ -1,18 +1,16 @@
-package cn.xuexuan.newui.ui;
+package cn.xuexuan.newui.ui.zhihu;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import cn.xuexuan.newui.BR;
 import cn.xuexuan.newui.R;
-import cn.xuexuan.newui.base.BaseActivity;
+import cn.xuexuan.newui.base.BaseFragment;
 import cn.xuexuan.newui.databinding.ActivityZhiHuBinding;
 import cn.xuexuan.newui.viewmodel.ZhiHuViewModel;
 import cn.xuexuan.newui.viewmodel.contract.ZhiHuContract;
@@ -21,13 +19,13 @@ import cn.xuexuan.newui.viewmodel.contract.ZhiHuContract;
  * Created by Jant on 2017/3/17.
  */
 
-public class ZhiHuActivity extends BaseActivity<ZhiHuViewModel> implements ZhiHuContract.View {
+public class ZhiHuFragment extends BaseFragment<ZhiHuViewModel> implements ZhiHuContract.View {
 
     private ActivityZhiHuBinding mActivityZhiHuBinding;
 
     @Override
     public void initInject() {
-        getActivityComponent().inject(this);
+        getFragmentComponent().inject(this);
     }
 
     @Override
@@ -38,18 +36,15 @@ public class ZhiHuActivity extends BaseActivity<ZhiHuViewModel> implements ZhiHu
     @Override
     public void initEventAndData() {
 
-        mActivityZhiHuBinding = DataBindingUtil.setContentView(this, R.layout.activity_zhi_hu);
+        mActivityZhiHuBinding = DataBindingUtil.setContentView(mActivity, R.layout.activity_zhi_hu);
         mActivityZhiHuBinding.setVariable(BR.viewModel, mViewModel);
-        mActivityZhiHuBinding.recyclerView.addItemDecoration(new DividerItemDecoration(this));
+        mActivityZhiHuBinding.recyclerView.addItemDecoration(new DividerItemDecoration(mActivity));
+        setTools(mActivityZhiHuBinding.toolbar);
 
-        setSupportActionBar(mActivityZhiHuBinding.toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, mActivityZhiHuBinding.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, mActivityZhiHuBinding.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.setDrawerListener(toggle);
+//        toggle.syncState();
 
         mActivityZhiHuBinding.CollapsingToolbarLayout.setExpandedTitleColor(Color.argb(0, 255, 255, 255));//设置还没收缩时状态下字体颜色
         mActivityZhiHuBinding.CollapsingToolbarLayout.setCollapsedTitleTextColor(Color.argb(255, 255, 255, 255));//设置收缩后Toolbar上字体的颜色

@@ -39,7 +39,7 @@ public class ZhiHuViewModel extends BaseViewModel<ZhiHuContract.View> implements
     //如果在这里使用@Inject，注意一定要在构造函数返回后，这个值才不为空，
     //断点调试发现，是在构造函数返回后，才注入变量
     //这也可以理解，因为在baseActivity中 @Inject viewModel需要这个构造函数提供依赖。
-    // 所以在生成baseActivity中的变量的时候，就会使用这个构造函数
+    // 所以在生成baseActivity中的变量的时候，就会先使用这个构造函数，但是此时变量为空
 //    @Inject RetrofitHelper mRetrofitHelper;
     private String mDateForGet;
 
@@ -134,6 +134,12 @@ public class ZhiHuViewModel extends BaseViewModel<ZhiHuContract.View> implements
                 .doOnNext(dailyListBean -> mTopItemViewModel.add(new TopItemViewModel(mContext,dailyListBean)))
                 .toList()
                 .subscribe((m) ->mView.setViewPager());
+
+    }
+
+
+    @Override
+    public void detachView() {
 
     }
 

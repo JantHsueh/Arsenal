@@ -6,6 +6,8 @@ import android.view.View;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cn.xuexuan.newui.app.App;
 import cn.xuexuan.newui.di.component.ActivityComponent;
 import cn.xuexuan.newui.di.component.DaggerActivityComponent;
@@ -22,16 +24,21 @@ public abstract class BaseActivity<T extends BaseVM> extends SupportActivity imp
 
     @Inject
     protected T mViewModel;
+    private Unbinder mUnBinder;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //填充布局的是否可以替换为DataBindingUtil.setContentView？？？
         setContentView(getLayout());
 
         initInject();
         if (mViewModel != null)
             mViewModel.attachView(this);
+
+        mUnBinder = ButterKnife.bind(this);
+
 
         initEventAndData();
     }
@@ -63,4 +70,10 @@ public abstract class BaseActivity<T extends BaseVM> extends SupportActivity imp
 //
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mUnBinder.unbind();
+
+    }
 }

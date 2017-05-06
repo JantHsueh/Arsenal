@@ -7,7 +7,7 @@ import android.databinding.ObservableField;
 import com.kelin.mvvmlight.command.ReplyCommand;
 
 import cn.xuexuan.newui.model.bean.DailyListBean;
-import cn.xuexuan.newui.ui.ZhiHuDetailActivity;
+import cn.xuexuan.newui.ui.zhihu.ZhiHuDetailActivity;
 
 /**
  * Created by Jant on 2017/4/15.

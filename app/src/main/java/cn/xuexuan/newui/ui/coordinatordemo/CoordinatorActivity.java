@@ -1,4 +1,4 @@
-package cn.xuexuan.newui.ui;
+package cn.xuexuan.newui.ui.coordinatordemo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -21,14 +21,10 @@ public class AppModule {
     }
 
 
-
     @Provides
     App provideApplication(){
      return application;
     }
-
-
-
 
     @Provides
 //    @Singleton

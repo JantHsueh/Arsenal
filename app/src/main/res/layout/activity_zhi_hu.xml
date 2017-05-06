@@ -10,120 +10,105 @@
         <variable
             name="viewModel"
             type="cn.xuexuan.newui.viewmodel.ZhiHuViewModel"/>
-        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers"/>
 
     </data>
 
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
+    <android.support.design.widget.CoordinatorLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:openDrawer="start">
+        android:fitsSystemWindows="true"
+        tools:context="cn.xuexuan.newui.MainActivity">
 
-        <android.support.design.widget.CoordinatorLayout
-
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="256dp"
             android:fitsSystemWindows="true"
-            tools:context="cn.xuexuan.newui.MainActivity">
+            >
 
-            <android.support.design.widget.AppBarLayout
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/CollapsingToolbarLayout"
                 android:layout_width="match_parent"
-                android:layout_height="256dp"
+                android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
+                app:contentScrim="@color/colorPrimary"
+                app:expandedTitleMarginEnd="64dp"
+                app:expandedTitleMarginStart="48dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 >
 
-                <android.support.design.widget.CollapsingToolbarLayout
-                    android:id="@+id/CollapsingToolbarLayout"
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fitsSystemWindows="true"
-                    app:contentScrim="@color/colorPrimary"
-                    app:expandedTitleMarginEnd="64dp"
-                    app:expandedTitleMarginStart="48dp"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                    >
-
-                    <android.support.v4.view.ViewPager
-                        android:id="@+id/viewpager"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fitsSystemWindows="true"
-                        app:itemView="@{viewModel.mTopItemView}"
-                        app:items="@{viewModel.mTopItemViewModel}"
-                        />
+                    app:itemView="@{viewModel.mTopItemView}"
+                    app:items="@{viewModel.mTopItemViewModel}"
+                    />
 
 
-                    <com.viewpagerindicator.CirclePageIndicator
-                        android:id="@+id/indicator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|center_horizontal"
-                        android:layout_marginBottom="15dp"
-                        android:padding="5dp"
-                        app:gapWidth="10dp"
-                        app:pageColor="@color/bottom_shadow"
-                        app:strokeColor="@color/colorAccent"
-                        />
+                <com.viewpagerindicator.CirclePageIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="15dp"
+                    android:padding="5dp"
+                    app:gapWidth="10dp"
+                    app:pageColor="@color/bottom_shadow"
+                    app:strokeColor="@color/colorAccent"
+                    />
 
 
-                    <android.support.v7.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:elevation="4dp"
-                        app:layout_collapseMode="pin"
-                        />
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:elevation="4dp"
+                    app:layout_collapseMode="pin"
+                    />
 
-                </android.support.design.widget.CollapsingToolbarLayout>
-            </android.support.design.widget.AppBarLayout>
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
 
-            <!--<android.support.v4.widget.NestedScrollView-->
+        <!--<android.support.v4.widget.NestedScrollView-->
 
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-            <!--&gt;-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+        <!--&gt;-->
 
-            <RelativeLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+            >
+
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:refreshing="@{viewModel.mIsRefreshing}"
+                app:onRefreshCommand="@{viewModel.onRefreshCommand}"
                 >
 
-
-                <android.support.v4.widget.SwipeRefreshLayout
-                    android:id="@+id/swipe_refresh_layout"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:refreshing="@{viewModel.mIsRefreshing}"
-                    app:onRefreshCommand="@{viewModel.onRefreshCommand}"
-                    >
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:itemView="@{viewModel.mListItemView}"
-                        app:items="@{viewModel.mListItemViewModel}"
-                        app:onLoadMoreCommand="@{viewModel.onLoadMoreCommand}"
-                        app:layoutManager="@{LayoutManagers.linear()}">
-                    </android.support.v7.widget.RecyclerView>
-                </android.support.v4.widget.SwipeRefreshLayout>
-            </RelativeLayout>
-            <!--</android.support.v4.widget.NestedScrollView>-->
-        </android.support.design.widget.CoordinatorLayout>
-
-        <android.support.design.widget.NavigationView
-
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            app:menu="@menu/activity_main_drawer"
-            >
-        </android.support.design.widget.NavigationView>
-    </android.support.v4.widget.DrawerLayout>
+                    app:itemView="@{viewModel.mListItemView}"
+                    app:items="@{viewModel.mListItemViewModel}"
+                    app:layoutManager="@{LayoutManagers.linear()}"
+                    app:onLoadMoreCommand="@{viewModel.onLoadMoreCommand}">
+                </android.support.v7.widget.RecyclerView>
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </RelativeLayout>
+        <!--</android.support.v4.widget.NestedScrollView>-->
+    </android.support.design.widget.CoordinatorLayout>
 
 </layout>

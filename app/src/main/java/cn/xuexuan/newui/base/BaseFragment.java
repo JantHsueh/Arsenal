@@ -1,13 +1,20 @@
 package cn.xuexuan.newui.base;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import javax.inject.Inject;
 
+import cn.xuexuan.newui.app.App;
+import cn.xuexuan.newui.di.component.DaggerFragmentComponent;
+import cn.xuexuan.newui.di.component.FragmentComponent;
+import cn.xuexuan.newui.di.module.FragmentModule;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
@@ -18,7 +25,17 @@ public abstract class BaseFragment<T extends BaseVM> extends SupportFragment imp
 
     @Inject
     protected T mViewModel;
+    protected AppCompatActivity mActivity;
 
+
+    @Override
+    public void onAttach(Activity activity) {
+
+        if (activity instanceof AppCompatActivity) {
+            mActivity = (AppCompatActivity) activity;
+        }
+        super.onAttach(activity);
+    }
 
     @Nullable
     @Override
@@ -49,13 +66,30 @@ public abstract class BaseFragment<T extends BaseVM> extends SupportFragment imp
         }
     }
 
+
+
+    protected void setTools(Toolbar toolbar){
+        mActivity.setSupportActionBar(toolbar);
+        mActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+
+
+    public FragmentComponent getFragmentComponent() {
+
+        return DaggerFragmentComponent
+                .builder()
+                .appComponent(App.getAppComponent())
+                .fragmentModule(new FragmentModule(this))
+                .build();
+
+    }
+
     public abstract int getLayout();
 
     public abstract void initEventAndData();
 
     public abstract void initInject();
-
-
-
 
 }
