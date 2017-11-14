@@ -13,7 +13,7 @@
 - 知乎日报 
 - WIFI（未集成）
 - 相机（未集成）
-- 二维码（未集成）
+- 二维码（https://github.com/JantHsueh/ZxingAndroid）
 - 文件选择（未集成）
 - 角标（未集成）
 - 解压文件（未集成）
